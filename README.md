@@ -23,18 +23,34 @@
     - This results in a dramatic increase in agility for the organization since the cost and time it takes to experiment and develop is significantly lower.
 - **Go global in minutes**
     - Easily deploy your application in multiple regions around the world with just a few clicks. This means you can provide lower latency and a better experience for your customers at minimal cost.
+- **Highly Available**
+    - AWS utilizes multiple, geographically separate Availability Zones to ensure continuous service, even if one zone is disrupted.
+
+- **Fault Tolerant**
+    - By distributing resources across isolated Availability Zones, AWS reduces the risk of failures impacting overall operations.
+
 
 ## Design principles AWS in the cloud
 
 - Perform operations as code
-- Make frequent, small
-- reversible changes
+- Make frequent, small, reversible changes
 - Refine operations procedures frequently
 - Anticipate failure
 - learn from ops failures
+- Loose coupling helps reduce the risk of cascading failures between components
+
+
+## Best practices
+**Securing your AWS account**
+- Creating individual IAM users
+- Using groups to assign them permissions
+- Creating a strong password policy
+- Delete your root access keys
+    - The root user should only be used in emergencies, and therefore there should be no need to have root access keys which allow the root user programmatic access - any programmatic access should use something other than the root account (least privilege concept). It is not also possible to delete the root password, and this should be securely, safely stored and not used in any applications!
+ 
 
 ## AWS Shared Responsibility Model
-
+- Customer is responsible for the _guest_ operating system
 ![Image1](./images/img1.png)
 
 ![Image2](./images/img2.png)
@@ -73,9 +89,11 @@ An *instance store* provides temporary block-level storage for your instance. 
 - Pay-as-you-go pricing model
 
 ### Reserved instances
-
+Reserved Instances provide you with significant savings compared to On-Demand Instance pricing. 
+Optimal for projects with predictable, consistent daily usage over an extended period.
 - Standard Reserved Instance
 - Convertible Reserved Instance
+- Do not focus on the license compatibility and physical server allocation that Dedicated Hosts offer, which is essential for using existing licenses 
 
 ### EC2 Instance saving plans
 
@@ -92,7 +110,7 @@ An *instance store* provides temporary block-level storage for your instance. 
 - %90 discount
 
 ### Dedicated host
-
+Allow you to use your existing per-socket, per-core, or per-VM software licenses, subject to your license terms
 ![Image3](./images/img3.png)
 
 - Isolation and Compliance
@@ -234,7 +252,8 @@ An *instance store* provides temporary block-level storage for your instance. 
 - Stores data in a single AWS Availability Zone for cost savings.
 - Suitable for less frequently accessed data.
 - Requires a minimum storage duration of 30 days.
-- Can be preferred for backups or data that can be recreated.
+- Can be preferred for backups or data that can be recreated
+- Could all be accessed immediately, but some may incur additional fees for accessing
 
 **S3 Intelligent-Tiering:**
 
@@ -381,12 +400,14 @@ IAM gives you the flexibility to configure access based on your company’s spec
 
 ## AWS WAF
 
+- No defaults. Self configured to meet your requirements
 - Web Application Protection
 - Rule Creation
 - Rate Limiting
 - Managed Rules
 - Real-time Metric
 - Global Reach
+- _Can_ be set to specific regions (remember regions are isolated and resources aren't automatically replicated across them)
 - Block IP Addresses
 - SQL Injection
 - Provides protection at Layer 7
@@ -418,6 +439,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - Records API calls and actions made within your account.
 - Provides a trail of events for security and compliance analysis.
 - Helps in tracking changes, identifying potential security risks, and troubleshooting.
+- Tracking users: will remember the username and region
 
 ## AWS Trusted Advisor
 
@@ -427,6 +449,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - Provides the ability to directly perform suggested actions by clicking on specific suggestions.
 - Provides some basic checking for free for all AWS customers, but Business or Enterprise support plans may be needed for further advice.
 - Detects security vulnerabilities.
+    - Exposed access keys: checks this for Enterprise and Business Support customers.
 - Helps you optimize your AWS accounts to reduce costs.
 - Monitors service quotas and warns when they are exceeded.
 - Can monitor in real time and give suggestions.
@@ -567,6 +590,10 @@ IAM gives you the flexibility to configure access based on your company’s spec
 ## AWS Marketplace
 
 AWS Marketplace is a digital catalog that includes thousands of software listings from independent software vendors. You can use AWS Marketplace to find, test, and buy software that runs on AWS.
+
+
+## AWS Managed Services
+Helps you efficiently operate your AWS infrastructure and reduces operational risks and overhead. Not to be confused with APN Consulting partner which is more strategic guidance and project-specific support rather than ongoing operational management.
 
 
 ## AWS Cloud Adoption Framework (CAF)
@@ -1119,6 +1146,7 @@ AWS customers are allowed to carry out security assessments and penetration test
 
 - Provides a platform that allows developers to create, distribute and run their applications.
 - Example AWS Services: AWS Elastic Beanstalk, AWS App Runner, AWS OpsWorks.
+- Removes need for organisations to manage underlying infrastructure (hardware and OS), allowing you to focus on the deployment and management of the applications
 
 ### **SaaS (Software as a Service)**
 
@@ -1180,7 +1208,12 @@ AWS customers are allowed to carry out security assessments and penetration test
 - Helps you increase user engagement and improve user conversion rates by creating customized messages.
 
 ## **AWS Secrets Manager**
-
+Used for secrets like API keys and database credentials, rather than for storing encryption keys for data at rest. Not to be confused with:
+**CloudHSM**
+- A hardware security module (HSM) used to generate and store **encryption keys**.
+**Key Management Service (KMS)**
+- Generate and store **encryption keys**
+  
 1. Enables applications, automated processes, and other AWS services to securely access confidential information.
 2. Provides a simple and automated way to return, manage and retrieve confidential information.
 3. It has the capacity to store sensitive data such as passwords and API keys for integration into AWS services or databases.
@@ -1468,8 +1501,9 @@ Amazon FSx is one of AWS's file-based storage services.
 - Centrally manage policies across multiple AWS accounts
 - Govern access to AWS services, resources and regions
 - Automate was account creation and management
-- Consolidate billing across multiple AWS accounts
+- Consolidate billing across multiple AWS accounts - can receive 1 bill for all their AWS accounts.
 - Control access to AWS services.
+- Reduce costs by sharing resources across accounts
 
 ## VPC Endpoint
 
@@ -1518,6 +1552,9 @@ VPC Interface Endpoint is a private network port within AWS VPC. This endpoint a
 - Customizable content delivery with Lambda@Edge
 - Dynamic content & API acceleration
 - Software distribution
+
+Origins it accepts:
+- Domain name: S3 bucket, elastic load balancer, etc
 
 ## To estimate the costs of an Amazon CloudFront
 
@@ -1643,6 +1680,7 @@ Service Health Dashboard is the single place to learn about the availability and
 Account Health Dashboard, alerts are triggered by changes in the health of your AWS resources, giving you event visibility, and guidance to help quickly diagnose and resolve issues.
 
 ## Route 53 - **Choosing a routing policy**
+A highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost-effective way to route end users to internet applications by translating names (like www.example.com) into the numeric IP addresses (like 192.0.2.1) that computers use to connect to each other. Amazon Route 53 is fully compliant with IPv6 as well.
 
 - **Simple routing policy** – Use for a single resource that performs a given function for your domain, for example, a web server that serves content for the example.com website. You can use simple routing to create records in a private hosted zone.
 - **Failover routing policy** – Use when you want to configure active-passive failover. You can use failover routing to create records in a private hosted zone.
