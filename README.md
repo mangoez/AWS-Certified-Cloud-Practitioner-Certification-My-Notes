@@ -146,7 +146,7 @@ Allow you to use your existing per-socket, per-core, or per-VM software licenses
 
 
 ## VPC
-
+A virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. You can specify an IP address range for the VPC, add subnets, add gateways, and associate security groups.
 - **Internet Gateway (IGW)**:
     - Connects a VPC to the internet.
     - Allows instances in the VPC to directly communicate with the internet.
@@ -174,9 +174,16 @@ Allow you to use your existing per-socket, per-core, or per-VM software licenses
     
 
 ## Subnets
+A range of IP addresses in your VPC. You launch AWS resources, such as Amazon EC2 instances, into your subnets. You can connect a subnet to the internet, other VPCs, and your own data centers, and route traffic to and from your subnets using route tables.
 
 - A **private subnet** is a segment of an Amazon Virtual Private Cloud (VPC) that does not have direct internet access, making it suitable for hosting resources requiring enhanced security or internal communication within the VPC.
 - A **public subnet** is a segment of an Amazon Virtual Private Cloud (VPC) that is accessible from the internet, allowing resources deployed within it to have direct internet connectivity, making it suitable for web servers or applications that require external access.
+
+
+## Route table
+Contains a set of rules, called routes, that are used to determine where network traffic from your VPC is directed. You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table.
+
+Each route in a route table specifies the range of IP addresses where you want the traffic to go (the destination) and the gateway, network interface, or connection through which to send the traffic (the target).
 
 
 ## Security Groups vs Network ACLs (NACL)
