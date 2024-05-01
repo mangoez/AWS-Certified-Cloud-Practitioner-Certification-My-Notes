@@ -446,7 +446,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - Records API calls and actions made within your account.
 - Provides a trail of events for security and compliance analysis.
 - Helps in tracking changes, identifying potential security risks, and troubleshooting.
-- Tracking users: will remember the username and region
+- Tracking users: will remember the username and **region**
 
 ## AWS Trusted Advisor
 
@@ -937,6 +937,7 @@ AWS Systems Manager helps you select and deploy operating system and software pa
 - They often offer their solutions to customers on AWS Marketplace.
 - They have the ability to create products with deep integration with AWS.
 - Technology Partners often increase their compatibility with AWS through the APN Navigate program.
+- Can help the company plan and conduct the migration
 
 ## AWS Partner Network (APN) Consulting Partners
 
@@ -1145,6 +1146,7 @@ AWS customers are allowed to carry out security assessments and penetration test
 ![img15](./images/img15.png)
 
 ### **IaaS (Infrastructure as a Service)**
+Removes the need for organizations to manage the underlying infrastructure (usually hardware and operating systems) and allows you to focus on the deployment and management of your applications.
 
 - Provides access to basic computing resources over the internet.
 - Example AWS Services: EC2, Amazon S3, VPC.
