@@ -1217,7 +1217,7 @@ AWS customers are allowed to carry out security assessments and penetration test
 ## **AWS Secrets Manager**
 Used for secrets like API keys and database credentials, rather than for storing encryption keys for data at rest. Not to be confused with:
 **CloudHSM**
-- A hardware security module (HSM) used to generate and store **encryption keys**.
+- A hardware security module (HSM) used to **generate** and store **encryption keys**.
 **Key Management Service (KMS)**
 - Generate and store **encryption keys**
   
