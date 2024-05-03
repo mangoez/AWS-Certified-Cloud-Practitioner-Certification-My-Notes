@@ -477,6 +477,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - **Combined usage** – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans. This can result in a lower charge for your project, department, or company than with individual standalone accounts.
 
 ## AWS Budgets
+Cost Explorer is more focused on analyzing and understanding spending patterns, while Budgets is geared towards setting and monitoring budgetary limits.
 
 - Monitoring and cost management service in AWS.
 - Helps track and manage spending on AWS resources.
@@ -506,6 +507,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - Allows analysis by tags.
 
 ## AWS Cost Explorer
+Cost Explorer is more focused on analyzing and understanding spending patterns, while Budgets is geared towards setting and monitoring budgetary limits.
 
 - **Cost analysis and visualization tool in AWS.**
 - Provides detailed insights into AWS usage and spending.
@@ -1028,8 +1030,6 @@ AWS customers are allowed to carry out security assessments and penetration test
 8. Amazon WorkSpaces
 
 ## AWS Zonal Services
-
-1. Amazon EC2
 2. Amazon RDS
 3. Amazon Elastic Block Store (EBS)
 4. Amazon ElastiCache
