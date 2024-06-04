@@ -50,7 +50,8 @@
  
 
 ## AWS Shared Responsibility Model
-- Customer is responsible for the _guest_ operating system
+- Customer is responsible for the _guest_ operating system and applications
+- AWS is responsible for patching and fixing flaws within the infrastructure
 ![Image1](./images/img1.png)
 
 ![Image2](./images/img2.png)
@@ -89,10 +90,11 @@ An *instance store* provides temporary block-level storage for your instance. 
 - Pay-as-you-go pricing model
 
 ### Reserved instances
-Reserved Instances provide you with significant savings compared to On-Demand Instance pricing. 
+Reserved Instances provide you with significant savings compared to On-Demand Instance pricing - are available in all up-front, partial up-front, or no upfront payments
 Optimal for projects with predictable, consistent daily usage over an extended period.
 - Standard Reserved Instance
 - Convertible Reserved Instance
+    - can be exchanged during the term for another Convertible Reserved Instance with new attributes, including instance family, instance type, platform, scope, or tenancy, but not different length contract
 - Do not focus on the license compatibility and physical server allocation that Dedicated Hosts offer, which is essential for using existing licenses 
 
 ### EC2 Instance saving plans
@@ -128,6 +130,7 @@ Allow you to use your existing per-socket, per-core, or per-VM software licenses
     - Intuitive graphical interface with organized dashboard.
     - Suitable for those who prefer a GUI-based interaction.
 - **AWS CLI (Command Line Interface)**:
+    - When working with AWS from the CLI, you need to provide an access key and secret access key 
     - Provides direct commands for AWS services.
     - Can be used on Windows, Mac, and Linux.
     - Suitable for scripting and automation.
@@ -211,6 +214,16 @@ Each route in a route table specifies the range of IP addresses where you want t
 - Subnet Association
 - **Services:** S3, EC2, RDS, RedShift, ElastiCache, EFS, DocumentDB, Neptune, EMR, VPC Endpoints
 
+## DocumentDB
+Fast, scalable, highly available, and fully managed document database service that supports MongoDB workloads. 
+As a document database, Amazon DocumentDB makes it easy to store, query, and index JSON data
+
+## Redshift
+A data warehouse product. It is built on top of technology from the massive parallel processing data warehouse company ParAccel, to handle large scale data sets and database migrations
+
+## Neptune
+Neptune is a fully managed graph database that supports highly connected datasets. E.g linking identifiers like website browsing history, preferences
+
 ## Amazon Elastic Block Store (EBS)
 
 - EBS provides block-level storage for EC2 instances.
@@ -240,6 +253,7 @@ Each route in a route table specifies the range of IP addresses where you want t
 
 
 **S3 Standard:**
+Block Public Access setting on the S3 bucket is default to prevent accidental configuration of the S3 bucket and objects being visible from anywhere on the internet.
 
 - General-purpose storage class.
 - Provides high durability and fast data access.
@@ -374,13 +388,16 @@ IAM gives you the flexibility to configure access based on your company’s spec
 
 
 ## Root User
+https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html
 
-- Create, manage, and close AWS accounts.
+- Create, manage, and close AWS accounts
+    - Changing the email addess associated with an account 
 - Create and manage IAM (Identity and Access Management) users and groups.
 - Create and manage IAM roles.
 - Provide full access to all AWS services and resources.
 - Manage billing, payments, and account details.
-- Modify security settings and IAM policies.
+- Modify security settings and IAM policies
+    - Configuring S3 bucket to enable MFA 
 - Manage security and auditing services like AWS CloudTrail and AWS Config.
 - Change account name
 
@@ -431,8 +448,11 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - An overview of AWS risk and compliance
 - An auditing security checklist
 
-## Amazon CloudWatch
+## AWS X-Ray
+Provides an end-to-end view of requests as they travel through your application, and shows a map of your application’s underlying components. 
+You can use X-Ray to analyze from simple three-tier applications to complex microservices applications consisting of thousands of services. 
 
+## Amazon CloudWatch
 - Monitoring and management service for AWS resources.
 - Collects and tracks metrics, logs, and events.
 - Provides insights into application and infrastructure performance.
@@ -441,6 +461,7 @@ IAM gives you the flexibility to configure access based on your company’s spec
 - CloudWatch Logs allows you to collect and store logs from your AWS infrastructure in a central location, Logs Streams represent source-based sequential streams of these logs. CloudWatch Logs Insights is a query and analysis tool that makes it easier for you to dive deeper into these logs and analyze them.
 
 ## AWS CloudTrail
+A design principle of the Security pillar is to track who did what and when. The Security pillar focuses on putting mechanisms in place to protect your systems and data, this is one of them.
 
 - Logging and auditing service for AWS accounts.
 - Records API calls and actions made within your account.
@@ -493,6 +514,9 @@ Cost Explorer is more focused on analyzing and understanding spending patterns, 
 - Provides cost breakdowns based on selected configurations.
 - Allows comparison of different pricing options.
 - Aids in understanding potential expenses before deploying resources.
+
+## Cost allocation tags
+A tag is a label that you or AWS assign to an AWS resource. Each tag consists of a key and a value. Tagged resources can appear on the Cost Explorer or on a cost allocation report.
 
 ## AWS Cost and Usage Report (CUR)
 
@@ -707,7 +731,7 @@ Helps you efficiently operate your AWS infrastructure and reduces operational ri
 - Storage: 80 TB
 - Compute: 40 vCPUs, and 80 GiB
 - **Snowball Edge Storage Optimized ⇒** well suited for large-scale data migrations and recurring transfer workflows, in addition to local computing with higher capacity needs.
-- **Snowball Edge Compute Optimized ⇒** provides powerful computing resources for use cases such as machine learning, full motion video analysis, analytics, and local computing stacks.
+- **Snowball Edge Compute Optimized ⇒** offers secure, on-board storage and compute power that can handle local processing and edge computing workloads in disconnected environments. Provides powerful computing resources for use cases such as machine learning, full motion video analysis, analytics, and local computing stacks. 
 
 **AWS Snowmobile:**
 
@@ -743,8 +767,8 @@ Helps you efficiently operate your AWS infrastructure and reduces operational ri
 - Learn from all operational failures
 - IaaS
 
-### Security
 
+### Security
 
 - The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
 - Implement a strong identity foundation
@@ -754,6 +778,7 @@ Helps you efficiently operate your AWS infrastructure and reduces operational ri
 - Protect data in transit and at rest
 - Keep people away from data
 - Prepare for security events
+
 
 ### Reliability
 
@@ -905,6 +930,8 @@ Helps you efficiently operate your AWS infrastructure and reduces operational ri
 AWS Systems Manager helps you select and deploy operating system and software patches automatically across large groups of Amazon EC2 or on-premises instances. Through patch baselines, you can set rules to auto-approve select categories of patches to be installed, such as operating system or high severity patches. Systems Manager helps ensure that your software is up-to-date and meets your compliance policies.
 
 ## AWS Load Balancer
+Sits between the user and the server group and acts as an invisible facilitator, ensuring that all resource servers are used equally.
+Load balancers monitor the health of EC2 instances and route the traffic to only instances that are in a healthy state.
 
 1. **Application Load Balancer (ALB)**:
      - It operates at Layer 7 (Application Layer) and is best for balancing HTTP/HTTPS traffic.
@@ -951,7 +978,7 @@ AWS Systems Manager helps you select and deploy operating system and software pa
 - They guide customers in optimizing and managing AWS costs.
 
 ## AWS Inspector
-
+Inspector works with **EC2** instances to uncover and report vulnerabilities.
 - AWS Inspector is a service that automatically evaluates the security and compliance of your applications on AWS.
 - This service scans your applications and identifies potential security vulnerabilities and compatibility issues.
 - Creates reports and makes suggestions about detected vulnerabilities and incompatibilities.
@@ -1256,6 +1283,7 @@ CloudHSM is designed for applications with high performance and security require
 - KMS is a service that allows customers to manage their cryptographic keys and encrypt data using these keys. With KMS you can create, rotate, manage and use keys. KMS is used to provide data encryption in AWS services and applications.
 
 ## **AWS Elastic MapReduce (EMR)**
+A managed cluster platform that simplifies running big data frameworks.
 
 1. It is a scalable cloud computing platform for big data processing tasks.
 2. It can analyze data using popular frameworks such as Apache Hadoop and Apache Spark.
@@ -1472,12 +1500,17 @@ The Distribution Path is for organizations that recruit, onboard, and support th
 - **AWS Proton**
 - **AWS Fargate**
 
+## Elastic Beanstalk
+Deploying and scaling web applications and service.
+- Monitors application health via a health dashboard.
+
+
 ## AWS Site-to-Site VPN
 
 - AWS Site-to-Site VPN is a service that allows companies to establish a private and secure network connection between their data centers and Amazon Virtual Private Cloud (Amazon VPC). This connection is made reliably and securely over the internet using IPsec VPN tunnels.
 - Virtual Private Gateway (VGW), Transit Gateway, Customer Gateway
 
-##AmazonFSx
+## AmazonFSx
 
 Amazon FSx is one of AWS's file-based storage services.
 
@@ -1690,6 +1723,8 @@ Account Health Dashboard, alerts are triggered by changes in the health of your 
 
 ## Route 53 - **Choosing a routing policy**
 A highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost-effective way to route end users to internet applications by translating names (like www.example.com) into the numeric IP addresses (like 192.0.2.1) that computers use to connect to each other. Amazon Route 53 is fully compliant with IPv6 as well.
+
+Route 53 can be used to configure DNS health checks to route traffic to healthy endpoints or to monitor the health of your applications.
 
 - **Simple routing policy** – Use for a single resource that performs a given function for your domain, for example, a web server that serves content for the example.com website. You can use simple routing to create records in a private hosted zone.
 - **Failover routing policy** – Use when you want to configure active-passive failover. You can use failover routing to create records in a private hosted zone.
