@@ -139,12 +139,15 @@ Examples:
 * Relationships established via keys enforced by the system
 
 # NoSQL
-* Anything that is non-relational
+* Anything that is "non-relational"
+  * The data is still relational, they just let go of some traditional constraints
+  * This allows you to scale out easier
 * Can be tabular, document, graph, etc
 * Built to scale with high performance but queries comes at a cost
 * Relies on Key Value, must know the key
 * Storage hashes the input into a partition of physical storage
 * Scaling just means adding more partitions!
+* High throughput, low-latency reads and writes
 
 ## When to use SQL vs NoSQL
 ![image](https://github.com/mangoez/AWS-Certified-Cloud-Practitioner-Certification-My-Notes/assets/69587452/5f14e41a-e311-42fc-ae55-e50a6c1c82ab)
